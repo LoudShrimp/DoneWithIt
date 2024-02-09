@@ -12,16 +12,17 @@ import {
   Button, 
   Platform 
 } from 'react-native';
+import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks'
 
 export default function App() {
-  const handlePress = () => console.log("text pressed")
+  const orientation = useDeviceOrientation();
 
   return (
     <SafeAreaView style={[styles.container]}>
       <View style={{
         backgroundColor: 'dodgerblue',
-        width: "50%",
-        height: 70
+        width: "100%",
+        height: orientation === "landscape" ? "100%" : "30%",
     }}></View>
     </SafeAreaView>
   );
