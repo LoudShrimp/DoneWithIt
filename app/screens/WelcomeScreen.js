@@ -14,8 +14,8 @@ function WelcomeScreen({ navigation }) {
                 <Text style={styles.tagline}>Sell What You Don't Need</Text>
             </View>
             <View style={styles.buttonsContainer}>
-                <AppButton title="Login" />
-                <AppButton title="register" color="secondary" />
+                <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
+                <AppButton title="register" color="secondary" onPress={() => navigation.navigate("Register")}  />
             </View>
         </ImageBackground>
     );
