@@ -19,7 +19,7 @@ const listings = [
         image: require('../assets/couch.jpg')
     },
 ]
-function ListingScreen(props) {
+function ListingScreen({ navigation }) {
     return (
         <Screen style={styles.screen}>
             <FlatList
@@ -30,6 +30,7 @@ function ListingScreen(props) {
                         title={item.title}
                         subtitle={"$" + item.price}
                         image={item.image}
+                        onPress={() => navigation.navigate("ListingDetails", item)}
                     />
                 } 
             />
