@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
@@ -11,6 +11,7 @@ import {
 import Screen from "../components/Screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import listingsApi from "../api/listings";
 import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
@@ -18,7 +19,7 @@ const validationSchema = Yup.object().shape({
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
-  images: Yup.array().min(1, "Please select at least one image.")
+  images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
@@ -81,6 +82,13 @@ const categories = [
 function ListingEditScreen() {
   const location = useLocation();
 
+  const handleSubmit = async (listing) => {
+    const result = await listingsApi.addListing({ ...listing, location });
+    console.log(result);
+    if (!result.ok) return alert("Could not save the listing.");
+    alert("Success");
+  };
+
   return (
     <Screen style={styles.container}>
       <Form
@@ -89,9 +97,9 @@ function ListingEditScreen() {
           price: "",
           description: "",
           category: null,
-          images: []
+          images: [],
         }}
-        onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
@@ -103,13 +111,14 @@ function ListingEditScreen() {
           placeholder="Price"
           width={120}
         />
-        <Picker 
-          items={categories} 
+        <Picker
+          items={categories}
           name="category"
-          numberOfColumns={3} 
-          PickerItemComponent = {CategoryPickerItem}
-          placeholder="Category" 
-          width="50%" />
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
+          placeholder="Category"
+          width="50%"
+        />
         <FormField
           maxLength={255}
           multiline
