@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import {
@@ -82,25 +82,34 @@ const categories = [
 
 function ListingEditScreen() {
   const location = useLocation();
-  const [uploadVisible, setUploadVisible] = useState(false);
+  // const [uploadVisible, setUploadVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const handleSubmit = async (listing) => {
     setProgress(0);
-    setUploadVisible(true);
+    // setUploadVisible(true);
     const result = await listingsApi.addListing(
       { ...listing, location },
       (progress) => setProgress(progress)
     );
-    setUploadVisible(false);
+    // setUploadVisible(false);
 
-    if (!result.ok) return alert("Could not save the listing.");
-    alert("Success");
+    if (!result.ok) {
+      // setUploadVisible(false);
+      return alert("Could not save the listing.");
+    }
+    alert("New listing succesfully created");
+    // console.log("Success");
   };
 
   return (
     <Screen style={styles.container}>
-      <UploadScreen progress={progress} visible={uploadVisible} />
+      {/* Depracated feature: Progress Bar */}
+      {/* <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      /> */}
       <Form
         initialValues={{
           title: "",
