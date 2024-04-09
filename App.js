@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { jwtDecode } from "jwt-decode";
 import "core-js/stable/atob";
+import { AppLoading } from "expo";
+import * as SplashScreen from "expo-splash-screen";
 
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
@@ -15,16 +17,29 @@ import authStorage from "./app/auth/storage";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
 
   const restoreToken = async () => {
     const token = await authStorage.getToken();
-    if (!token) return;
+    if (!token) return setIsReady(true);
+
     setUser(jwtDecode(token));
+    setIsReady(true);
   };
 
   useEffect(() => {
     restoreToken();
   }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (isReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [isReady]);
+
+  if (!isReady) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
