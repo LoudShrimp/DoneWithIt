@@ -19,16 +19,16 @@ export default function App() {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if (!token) return setIsReady(true);
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (!user) return setIsReady(true);
 
-    setUser(jwtDecode(token));
+    setUser(user);
     setIsReady(true);
   };
 
   useEffect(() => {
-    restoreToken();
+    restoreUser();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
