@@ -12,6 +12,7 @@ import ListingScreen from "../screens/ListingScreen";
 import feedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
+import expoPushTokensApi from "../api/expoPushTokens";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ const AppNavigator = () => {
           projectId: "ddc5413a-c3fa-44d5-9208-1807879da7ba",
         })
       ).data;
-      console.log(token);
+      expoPushTokensApi.register(token);
     } catch (error) {
       console.log("Error getting a push token", error);
     }
