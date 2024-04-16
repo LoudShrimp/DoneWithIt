@@ -13,33 +13,12 @@ import feedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
 import expoPushTokensApi from "../api/expoPushTokens";
+import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  useEffect(() => {
-    registerForPushNotifications();
-  }, []);
-
-  const registerForPushNotifications = async () => {
-    try {
-      const permission = await Notifications.requestPermissionsAsync();
-      // const permission = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      if (!permission.granted) {
-        console.log("permission not granted");
-        return;
-      }
-
-      const token = (
-        await Notifications.getExpoPushTokenAsync({
-          projectId: "ddc5413a-c3fa-44d5-9208-1807879da7ba",
-        })
-      ).data;
-      expoPushTokensApi.register(token);
-    } catch (error) {
-      console.log("Error getting a push token", error);
-    }
-  };
+  useNotifications();
 
   return (
     <Tab.Navigator>
