@@ -11,7 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -24,10 +26,15 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "plugins": ["expo-secure-store"],
+    "plugins": [
+      "expo-secure-store"
+    ],
     "extra": {
       "bugsnag": {
         "apiKey": "6d99befa008b023ceb08a96df1fd70da"
+      },
+      "eas": {
+        "projectId": "f3b1c55f-8b5c-47a6-a9c5-796ce7df2e28"
       }
     },
     "hooks": {
@@ -37,6 +44,12 @@
           "config": {}
         }
       ]
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f3b1c55f-8b5c-47a6-a9c5-796ce7df2e28"
     }
   }
 }
