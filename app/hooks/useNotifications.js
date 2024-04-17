@@ -57,7 +57,7 @@ export default useNotifications = () => {
       const token = await Notifications.getExpoPushTokenAsync({
         projectId: "ddc5413a-c3fa-44d5-9208-1807879da7ba",
       });
-      console.log(token);
+      // console.log(token);
       expoPushTokensApi.register(token.data);
     } catch (error) {
       console.log("Error getting a push token", error);
