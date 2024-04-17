@@ -8,13 +8,13 @@ import ListItemSeparator from "../components/ListItemSeparator";
 import useAuth from "../auth/useAuth";
 
 const menuItems = [
-  {
-    title: "My Listings",
-    icon: {
-      name: "format-list-bulleted",
-      backgroundColor: colors.primary,
-    },
-  },
+  // {
+  //   title: "My Listings",
+  //   icon: {
+  //     name: "format-list-bulleted",
+  //     backgroundColor: colors.primary,
+  //   },
+  // },
   {
     title: "My Messages",
     icon: {
