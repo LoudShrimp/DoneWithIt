@@ -46,7 +46,8 @@
     "expo-application": "~5.8.4",
     "expo-crypto": "~12.8.1",
     "expo-device": "~5.9.4",
-    "expo-file-system": "~16.0.9"
+    "expo-file-system": "~16.0.9",
+    "expo-updates": "~0.24.12"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

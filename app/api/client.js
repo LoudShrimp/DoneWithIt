@@ -1,13 +1,10 @@
 import { create } from "apisauce";
 import cache from "../utility/cache";
 import authStorage from "../auth/storage";
+import settings from "../config/settings";
 
 const apiClient = create({
-  //Cassandra
-  // baseURL: "http://10.0.0.129:9000/api",
-  //Michael
-  baseURL: "http://192.168.0.121:9000/api",
-  // baseURL: "http://127.0.0.1:9000/api",
+  baseURL: settings.apiUrl,
 });
 
 apiClient.addAsyncRequestTransform(async (request) => {
